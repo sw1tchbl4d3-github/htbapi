@@ -1,8 +1,8 @@
 from htbapi.core import getRequest, postRequest, rawPostSSL
 
-def ownMachine(machineid, apitoken, hash, difficulty):
-    # /machines/own
-    # {"flag": hash, "difficulty": difficulty * 10, "id": machineid}
+def ownMachine(machineid, apitoken, flag, difficulty):
+    # return rawPostSSL("/machines/own", '{"flag":"' + flag + '","difficulty":' + str(difficulty * 10) + ',"id":' + str(machineid) + "}", apitoken)
+    # currently this function doesnt work, gonna fix it soon.
     pass
 
 def getAllMachines(apitoken):
@@ -25,26 +25,23 @@ def getAllRetiredMachines(apitoken):
     return retiredmachines
 
 def resetMachine(machineid, apitoken):
-    rawPostSSL("/vm/vip/reset/" + str(machineid), apitoken)
+    return rawPostSSL("/vm/vip/reset/" + str(machineid), "", apitoken)
 
-def startMachine(machineid, apitoken):
-    rawPostSSL("/vm/vip/assign/" + str(machineid), apitoken)
+def assignMachine(machineid, apitoken):
+    return rawPostSSL("/vm/vip/assign/" + str(machineid), "", apitoken)
 
 def stopMachine(machineid, apitoken):
-    rawPostSSL("/vm/vip/remove/" + str(machineid), apitoken)
+    return rawPostSSL("/vm/vip/remove/" + str(machineid), "", apitoken)
 
 def extendMachine(machineid, apitoken):
-    rawPostSSL("/vm/vip/extend/" + str(machineid), apitoken)
+    return rawPostSSL("/vm/vip/extend/" + str(machineid), "", apitoken)
 
 def getSpawnedMachines(apitoken):
-    # /api/machines/spawned/
-    pass
+    return getRequest("/machines/spawned/", apitoken).json()
 
 def getTerminatingMachines(apitoken):
-    # /api/machines/terminating/
-    pass
+    return getRequest("/machines/terminating/", apitoken).json()
 
 def getResettingMachines(apitoken):
-    # /api/machines/resetting/
-    pass
+    return getRequest("/machines/resetting/", apitoken).json()
 
