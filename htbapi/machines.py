@@ -1,4 +1,4 @@
-from htbapi.core import getRequest, postRequest, postHTTPC
+from htbapi.core import getRequest, postRequest, rawPostSSL
 
 def ownMachine(machineid, apitoken, hash, difficulty):
     # /machines/own
@@ -6,7 +6,7 @@ def ownMachine(machineid, apitoken, hash, difficulty):
     pass
 
 def getAllMachines(apitoken):
-    return getRequest("/machines/get/all/", apitoken)
+    return getRequest("/machines/get/all/", apitoken).json()
         
 def getAllActiveMachines(apitoken):
     activemachines = []
@@ -25,16 +25,16 @@ def getAllRetiredMachines(apitoken):
     return retiredmachines
 
 def resetMachine(machineid, apitoken):
-    # /vm/reset/machineid
-    pass
+    rawPostSSL("/vm/vip/reset/" + str(machineid), apitoken)
 
 def startMachine(machineid, apitoken):
-    # /vm/vip/assign/machineid/
-    postHTTPC("/vm/vip/assign/" + machineid, "", apitoken)
+    rawPostSSL("/vm/vip/assign/" + str(machineid), apitoken)
 
 def stopMachine(machineid, apitoken):
-    # /vm/vip/remove/machineid/
-    pass
+    rawPostSSL("/vm/vip/remove/" + str(machineid), apitoken)
+
+def extendMachine(machineid, apitoken):
+    rawPostSSL("/vm/vip/extend/" + str(machineid), apitoken)
 
 def getSpawnedMachines(apitoken):
     # /api/machines/spawned/
