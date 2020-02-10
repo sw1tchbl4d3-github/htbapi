@@ -1,6 +1,6 @@
 from htbapi.core import getRequest, rawPostSSL
 
-def ownChallenge(challengeid, apitoken, flag, difficulty):
+def ownChallenge(challengeid: int, apitoken: str, flag: str, difficulty: int) -> str:
     response =  rawPostSSL("/challenges/own/", f'challenge_id={challengeid}&flag={flag}&difficulty={difficulty * 10}', apitoken, "x-www-form-urlencoded", "")
     if '"success":"1"'.encode() in response:
         return "success"

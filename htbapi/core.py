@@ -6,10 +6,10 @@ import json
 HEADERS = {"User-Agent": "htbapi"}
 BASE = "http://hackthebox.eu/api"
 
-def getRequest(url, apitoken):
+def getRequest(url: str, apitoken: str) -> str:
     return get(f"{BASE}{url}?api_token={apitoken}", headers=HEADERS)
 
-def rawPostSSL(url, data, apitoken, datatype, recvstop):
+def rawPostSSL(url: str, data: str, apitoken: str, datatype: str, recvstop: str) -> bytes:
     if not datatype == "":
         ct = f"Content-Type: application/{datatype}\r\nContent-Length: {len(data)}\r\n"
     else:

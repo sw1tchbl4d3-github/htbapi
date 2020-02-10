@@ -1,7 +1,7 @@
 from htbapi.core import rawPostSSL, getRequest
 import json
 
-def getShoutboxLatest(apitoken):
+def getShoutboxLatest(apitoken: str) -> dict:
     response = rawPostSSL(f"/shouts/get/initial/html/1", "", apitoken, "", "}").decode()
     if '"success":"0"' in response:
         return "failed"
@@ -9,14 +9,14 @@ def getShoutboxLatest(apitoken):
     jsondata = json.loads(response)
     return jsondata
 
-def sendShoutbox(msg, apitoken):
+def sendShoutbox(msg: str, apitoken: str) -> str:
     response = rawPostSSL("/shouts/new/", f"text={msg}", apitoken, "x-www-form-urlencoded", "")
     if '"success":"1"'.encode() in response:
         return "success"
     else:
         return "failed"
 
-def startConversation(msg, recipient, apitoken):
+def startConversation(msg: str, recipient: str, apitoken: str) -> str:
     response =  rawPostSSL("/conversations/new/", f"recipients%5B%5D={recipient}&message={msg}", apitoken, "x-www-form-urlencoded", "")
     if "No valid recipients selected".encode() in response:
         return "invalid_recipient"
@@ -25,7 +25,7 @@ def startConversation(msg, recipient, apitoken):
     else:
         return "failed"
 
-def sendConversationMessage(msg, conversationid, apitoken):
+def sendConversationMessage(msg: str, conversationid: str, apitoken: str) -> str:
     response = rawPostSSL(f"/conversations/send/{conversationid}/", f"id={conversationid}&message={msg}", apitoken, "x-www-form-urlencoded", "")
     # if you type an invalid id you for some reason get the skid message...
     if "You must have Script Kiddie rank or higher to send messages".encode() in response:
@@ -37,15 +37,16 @@ def sendConversationMessage(msg, conversationid, apitoken):
         return "failed"
     
 
-def getConversations(apitoken):
+def getConversations(apitoken: str) -> dict:
     response = rawPostSSL("/conversations/list/", "", apitoken, "", '"}]').decode()
     response = response[response.find('[{"id":'):]
     jsondata = json.loads(response)[0]
     return jsondata
 
 
-def getConversation(conversationid, apitoken):
+def getConversation(conversationid: int, apitoken: str) -> dict:
     response = rawPostSSL(f"/conversations/load/{conversationid}", "", apitoken, "", "}]\r\n").decode()
     response = response[response.find('[{"id":'):]
     jsondata = json.loads(response)
     return jsondata
+    
