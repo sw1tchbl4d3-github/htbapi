@@ -25,7 +25,7 @@ def startConversation(msg: str, recipient: str, apitoken: str) -> str:
     else:
         return "failed"
 
-def sendConversationMessage(msg: str, conversationid: str, apitoken: str) -> str:
+def sendConversationMessage(msg: str, conversationid: int, apitoken: str) -> str:
     response = rawPostSSL(f"/conversations/send/{conversationid}/", f"id={conversationid}&message={msg}", apitoken, "x-www-form-urlencoded", "")
     # if you type an invalid id you for some reason get the skid message...
     if "You must have Script Kiddie rank or higher to send messages".encode() in response:
@@ -37,14 +37,14 @@ def sendConversationMessage(msg: str, conversationid: str, apitoken: str) -> str
         return "failed"
     
 
-def getConversations(apitoken: str) -> dict:
+def getConversations(apitoken: str) -> list:
     response = rawPostSSL("/conversations/list/", "", apitoken, "", '"}]').decode()
     response = response[response.find('[{"id":'):]
-    jsondata = json.loads(response)[0]
+    jsondata = json.loads(response)
     return jsondata
 
 
-def getConversation(conversationid: int, apitoken: str) -> dict:
+def getConversation(conversationid: int, apitoken: str) -> list:
     response = rawPostSSL(f"/conversations/load/{conversationid}", "", apitoken, "", "}]\r\n").decode()
     response = response[response.find('[{"id":'):]
     jsondata = json.loads(response)
