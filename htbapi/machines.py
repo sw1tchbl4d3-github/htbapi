@@ -1,10 +1,10 @@
-from htbapi.core import getRequest, postRequest, rawPostSSL
+from htbapi.core import getRequest, rawPostSSL
 
 def ownRoot(machineid, apitoken, flag, difficulty):
-    return rawPostSSL("/machines/own/root/" + str(machineid), '{"hash":"' + flag + '","difficulty":' + str(difficulty * 10) + "}", apitoken)
+    return rawPostSSL(f"/machines/own/root/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}"', apitoken, "json", "")
 
 def ownUser(machineid, apitoken, flag, difficulty):
-    return rawPostSSL("/machines/own/user/" + str(machineid), '{"hash":"' + flag + '","difficulty":' + str(difficulty * 10) + "}", apitoken)
+    return rawPostSSL(f"/machines/own/user/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}"', apitoken, "json", "")
 
 def getAllMachines(apitoken):
     return getRequest("/machines/get/all/", apitoken).json()
@@ -26,16 +26,16 @@ def getAllRetiredMachines(apitoken):
     return retiredmachines
 
 def resetMachine(machineid, apitoken):
-    return rawPostSSL("/vm/vip/reset/" + str(machineid), "", apitoken)
+    return rawPostSSL(f"/vm/vip/reset/{machineid}", "", apitoken, "", "")
 
 def assignMachine(machineid, apitoken):
-    return rawPostSSL("/vm/vip/assign/" + str(machineid), "", apitoken)
+    return rawPostSSL(f"/vm/vip/assign/{machineid}", "", apitoken, "", "")
 
 def stopMachine(machineid, apitoken):
-    return rawPostSSL("/vm/vip/remove/" + str(machineid), "", apitoken)
+    return rawPostSSL(f"/vm/vip/remove/{machineid}", "", apitoken, "", "")
 
 def extendMachine(machineid, apitoken):
-    return rawPostSSL("/vm/vip/extend/" + str(machineid), "", apitoken)
+    return rawPostSSL(f"/vm/vip/extend/{machineid}", "", apitoken, "", "")
 
 def getSpawnedMachines(apitoken):
     return getRequest("/machines/spawned/", apitoken).json()
