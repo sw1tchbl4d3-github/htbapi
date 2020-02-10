@@ -1,10 +1,13 @@
 from htbapi.core import getRequest, rawPostSSL
 
 def ownRoot(machineid, apitoken, flag, difficulty):
-    return rawPostSSL(f"/machines/own/root/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}"', apitoken, "json", "")
+    return rawPostSSL(f"/machines/own/root/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}', apitoken, "json", "")
 
 def ownUser(machineid, apitoken, flag, difficulty):
-    return rawPostSSL(f"/machines/own/user/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}"', apitoken, "json", "")
+    return rawPostSSL(f"/machines/own/user/{machineid}", f'{{"hash":"{flag}","difficulty":{difficulty * 10}}}', apitoken, "json", "")
+
+def ownMachine(machineid, apitoken, flag, difficulty):
+    return rawPostSSL(f"/machines/own", f'{{"hash":"{flag}","difficulty":{difficulty * 10}, "id":{machineid}}}', apitoken, "json", "")
 
 def getAllMachines(apitoken):
     return getRequest("/machines/get/all/", apitoken).json()
