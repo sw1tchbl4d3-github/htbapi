@@ -10,5 +10,5 @@ setup(
         author_email="jsimeze@pm.me",
         url="https://github.com/sw1tchbl4d3-github/htbapi",
         packages=["htbapi"],
-        install_requires=["request"]
+        install_requires=["requests"]
 )
