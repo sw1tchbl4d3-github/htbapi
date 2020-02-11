@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
         name="htbapi",
         version="1.0",
-        desription="An unofficial API Wrapper for Hackthebox (and more!)",
+        description="An unofficial API Wrapper for Hackthebox (and more!)",
         long_description=open("README.md", "r").read(),
         license="GPL",
         author="sw1tchbl4d3",
