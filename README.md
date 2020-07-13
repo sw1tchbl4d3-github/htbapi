@@ -1,5 +1,3 @@
-# DEVELOPMENT MOVED TO GITLAB [htbapi](https://gitlab.com/sw1tchbl4d3/htbapi)
-
 # htbapi
 An unofficial API Wrapper for Hackthebox (and more!) 
 
