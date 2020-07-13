@@ -28,6 +28,4 @@ Always do `import htbapi.*`, `import htbapi.SUBMODULE`, or `from htbapi.SUBMODUL
 
 If you wanna know what functions you can use, go to the [Wiki](https://github.com/sw1tchbl4d3-github/htbapi/wiki).
 
-***
 
-If you really like my work and you have some spare money to spend, why not [donate on PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=U2BJNHKZYRR38&source=url)? 
